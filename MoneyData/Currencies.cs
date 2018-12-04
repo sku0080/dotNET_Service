@@ -3,68 +3,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Net;
-using System.Net.Mail;
-using System.ServiceProcess;
 using System.Text;
 using System.Xml;
 
-namespace dotNET_Service
+namespace dotNET_Currencies
 {
-    public partial class ServiceDotNet : ServiceBase
-    {
-        private static string Database_Name = "\\database.xml";
-        private string Database_Filepath = (AppDomain.CurrentDomain.BaseDirectory + Database_Name);
-
-        private string Msg_Body = "";
-
-        public ServiceDotNet()
-        {
-            InitializeComponent();
-        }
-
-        protected override void OnStart(string[] args)
-        {
-            Currencies Data = new Currencies(Database_Filepath);
-
-            List<string> currencies = new List<string>();
-            currencies = Data.DownloadData();
-
-            foreach (string currency in currencies)
-            {
-                Msg_Body += currency + "\n";
-                Data.Insert_Record(currency, DateTime.Now);
-            }
-
-            SendMail();
-        }
-
-        protected override void OnStop()
-        {
-
-        }
-
-        public void SendMail()
-        {
-            try
-            {
-                SmtpClient MailServer = new SmtpClient("smtp.gmail.com", 587);
-                MailServer.EnableSsl = true;
-                MailServer.Credentials = new System.Net.NetworkCredential("vitezslav.skura@gmail.com", "AppleGoogle970120");
-
-                MailMessage Msg = new MailMessage("vitezslav.skura@gmail.com", "vita.skura@email.cz");
-                Msg.Subject = "Service Project";
-                Msg.Body = this.Msg_Body;
-
-                MailServer.Send(Msg);
-            }
-
-            catch (Exception e)
-            {
-                throw new ApplicationException();
-            }
-        }
-    }
-
     public class Currencies
     {
         private string Database;
@@ -81,7 +24,7 @@ namespace dotNET_Service
 
             List<String> CurrencyList = new List<string>();
 
-            using (WebClient wc = new WebClient())
+            using(WebClient wc = new WebClient())
             {
                 string txt = wc.DownloadString(url);
 
@@ -116,8 +59,9 @@ namespace dotNET_Service
             XmlDocument doc = new XmlDocument();
             string[] Currency = Record.Split(new char[] { ' ' });
 
-            if (!File.Exists(this.Database))
+            if (File.Exists(this.Database))
             {
+
                 XmlTextWriter tw;
                 tw = new XmlTextWriter(this.Database, Encoding.UTF8);
 
@@ -144,10 +88,46 @@ namespace dotNET_Service
             dateElem.AppendChild(dateText);
             codeElem.AppendChild(dateElem);
 
-             doc.DocumentElement.AppendChild(codeElem);
+            doc.DocumentElement.AppendChild(codeElem);
 
             fs.Close();
             doc.Save(this.Database);
+        }
+
+        public List<double> Get_List_Code(string Code)
+        {
+            XmlNodeList list;
+            XmlDocument doc = new XmlDocument();
+            FileStream file = new FileStream(this.Database, FileMode.Open);
+            doc.Load(file);
+            CultureInfo culture = CultureInfo.CurrentCulture;
+            list = doc.SelectNodes("//" + Code + "/Value");
+            List<double> Code_list = new List<double>();
+            foreach (XmlElement item in list)
+            {
+                Code_list.Add(double.Parse(item.InnerText, culture));
+            }
+
+            file.Close();
+            return Code_list;
+        }
+
+        public List<string> Get_List_Dates()
+        {
+            XmlNodeList list;
+            XmlDocument doc = new XmlDocument();
+            FileStream file = new FileStream(this.Database, FileMode.Open);
+            doc.Load(file);
+            CultureInfo culture = CultureInfo.CurrentCulture;
+            list = doc.SelectNodes("//EUR/Date");
+            List<string> Date_list = new List<string>();
+            foreach (XmlElement item in list)
+            {
+                Date_list.Add(item.InnerText);
+            }
+
+            file.Close();
+            return Date_list;
         }
     }
 }

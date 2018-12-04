@@ -1,6 +1,6 @@
 ﻿namespace dotNET_Service
 {
-    partial class Service1
+    partial class ServiceDotNet
     {
         /// <summary> 
         /// Vyžaduje se proměnná návrháře.
@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.ServiceName = "Service1";
+            // 
+            // ServiceDotNet
+            // 
+            this.ServiceName = "ServiceDotNet";
+
         }
 
         #endregion

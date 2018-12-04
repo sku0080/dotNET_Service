@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotNET_Service", "dotNET_Service\dotNET_Service.csproj", "{80B0A35C-1212-45A7-BFFF-4D4697F61903}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotNET_Currencies", "MoneyData\dotNET_Currencies.csproj", "{C06132FE-A568-40A6-A3D7-738238C977AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotNET_Console", "Konzole\dotNET_Console.csproj", "{76B9615C-FCC2-4F2F-80B2-A024B63A3DF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{80B0A35C-1212-45A7-BFFF-4D4697F61903}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80B0A35C-1212-45A7-BFFF-4D4697F61903}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80B0A35C-1212-45A7-BFFF-4D4697F61903}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C06132FE-A568-40A6-A3D7-738238C977AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C06132FE-A568-40A6-A3D7-738238C977AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C06132FE-A568-40A6-A3D7-738238C977AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C06132FE-A568-40A6-A3D7-738238C977AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76B9615C-FCC2-4F2F-80B2-A024B63A3DF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76B9615C-FCC2-4F2F-80B2-A024B63A3DF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76B9615C-FCC2-4F2F-80B2-A024B63A3DF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76B9615C-FCC2-4F2F-80B2-A024B63A3DF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
