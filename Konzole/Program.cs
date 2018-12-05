@@ -13,13 +13,22 @@ namespace Konzole
             List<string> currencies = new List<string>();
             currencies = Data.DownloadData();
 
-            foreach(string currency in currencies)
+            /*foreach(string currency in currencies)
             {
                 Console.WriteLine(currency);
-                Data.Insert_Record(currency, DateTime.Now);
+                // Data.Insert_Record(currency, DateTime.Now);
             }
 
-            Console.ReadKey();
+            foreach(string item in Data.Get_List_Dates())
+            {
+                Console.WriteLine(item);
+            }*/
+
+            Graph graph = new Graph(Data);
+
+            graph.Draw();
+
+            //Console.ReadKey();
         }
     }
 }
